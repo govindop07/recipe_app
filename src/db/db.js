@@ -1,7 +1,7 @@
 import mysql from 'mysql2/promise';
 
 const pool = mysql.createPool({
-  host: "2401:4900:883f:9ba3:bd55:3f3a:e7e8:d03e",
+  host: "106.219.150.249",
   user: "recipe_admin",
   password: process.env.DATABASE_PASSWORD,
   database: "recipe_app",
