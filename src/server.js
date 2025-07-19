@@ -6,9 +6,12 @@ const app = express();
 app.use(express.json());
 const port = process.env.PORT || 5001;
 
-app.get("/", (req, res) => {
-  res.status(200).json({ success: true });
+app.get("/", async (req, res) => {
+  const query = 'select * from favorites where user_id = ?';
+  const response = await pool.execute(query, [123])
+  res.status(200).json({ success: true, data: response });
 });
+
 
 app.get("/api/favorites/:user_id", async (req, res) => {
   try {
