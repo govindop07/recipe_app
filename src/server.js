@@ -7,10 +7,16 @@ app.use(express.json());
 const port = process.env.PORT || 5001;
 
 app.get("/", async (req, res) => {
-  const query = 'select * from favorites where user_id = ?';
-  const response = await pool.execute(query, [123])
-  res.status(200).json({ success: true, data: response });
+  try {
+    const query = "SELECT * FROM favorites WHERE user_id = ?";
+    const [response] = await pool.execute(query, [123]);
+    res.status(200).json({ success: true, data: response });
+  } catch (error) {
+    console.error("Root route DB error:", error);
+    res.status(500).json({ error: "Something went wrong" });
+  }
 });
+
 
 
 app.get("/api/favorites/:user_id", async (req, res) => {
