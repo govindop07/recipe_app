@@ -1,14 +1,12 @@
-import mysql from 'mysql2/promise';
+import mongoose from "mongoose";
 
-const pool = mysql.createPool({
-  host: "106.219.150.249",
-  user: "recipe_admin",
-  password: process.env.DATABASE_PASSWORD,
-  database: "recipe_app",
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0,
-});
+const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect(process.env.MONGODB_URI);
+    console.log("Mongodb connected: ", conn.connection.host);
+  } catch (error) {
+    console.log("Mongodb connection error: ", error);
+  }
+}
 
-
-export default pool;
+export default connectDB;
