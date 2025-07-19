@@ -17,8 +17,6 @@ app.get("/", async (req, res) => {
   }
 });
 
-
-
 app.get("/api/favorites/:user_id", async (req, res) => {
   try {
     const { user_id } = req.params;
@@ -27,7 +25,7 @@ app.get("/api/favorites/:user_id", async (req, res) => {
     const userFavorites = await pool.execute(query, [user_id]);
     res.status(200).json(userFavorites[0]);
   } catch (error) {
-    console.log("Error adding favorite", error);
+    console.log("Error fetching favorite", error);
     res.status(500).json({ error: "Something went wrong" });
   }
 });
@@ -59,7 +57,7 @@ app.delete("/api/favorites/:user_id/:recipe_id", async (req, res) => {
     await pool.execute(query, [user_id, recipe_id]);
     res.status(200).json({ success: true, message: "Removed from favorites" });
   } catch (error) {
-    console.log("Error adding favorite", error);
+    console.log("Error deleting favorite", error);
     res.status(500).json({ error: "Something went wrong" });
   }
 });
