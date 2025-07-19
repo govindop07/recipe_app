@@ -1,9 +1,9 @@
 import mysql from 'mysql2/promise';
 
 const pool = mysql.createPool({
-  host: "103.21.220.14",
+  host: "2401:4900:883f:9ba3:bd55:3f3a:e7e8:d03e",
   user: "recipe_admin",
-  password: "#Bhulgaya123",
+  password: process.env.DATABASE_PASSWORD,
   database: "recipe_app",
   waitForConnections: true,
   connectionLimit: 10,
